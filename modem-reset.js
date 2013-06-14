@@ -1,9 +1,23 @@
 var page = require('webpage').create();
 
 /**
- * Datos a completar! 
+ * Este script ingresa via phantomjs a la interfaz web de
+ * configuración del modem Technicolor TC7110.
+ *
+ * Dado que el modem no ofrece interfaz telnet, se debe simular el
+ * acceso desde un browser.
+ *
+ * Por otro lado, como no ofrece desde la interfaz una feature para
+ * reiniciar, se debe contar con un backup previo de la configuración
+ * del modem. Este script simplemente restaura un backup, lo que fuerza
+ * que se reinicie el modem y se restrablezca la conexión en caso de que
+ * esté caída.
+ *
+ *
+ * Datos a completar:
  *		- Login a la interfaz de configuracion del modem
  *		- Path absoluto al archivo de backup
+ *
  */
 page.settings.userName = "";
 page.settings.password = "";
