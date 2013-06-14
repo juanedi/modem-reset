@@ -30,7 +30,7 @@ page.open(modem_ui, function (status) {
 			page.evaluate(function() {
 				jQuery.noConflict();
 				var filePath = jQuery("input[name=ImportFile]").val();
-				
+
 				if (filePath) {
 					console.log("Reiniciando modem!");
 					jQuery("input[type=submit]").click();
@@ -39,8 +39,9 @@ page.open(modem_ui, function (status) {
 				}
 
 			});
+			console.log("Fin!");
+			phantom.exit();
 		});
-
 	} else {
 		console.log("Error al cargar la página...")
 		phantom.exit();
