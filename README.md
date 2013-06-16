@@ -15,12 +15,15 @@ deseada, el cuál será restaurado (forzando el reset en la conexión).
 
 Intrucciones:
 
-1 Generar manualmente un backup desde la interfaz web del modem
-2 Configurar modem-reset.js
+* Generar manualmente un backup desde la interfaz web del modem
+
+* Configurar modem-reset.js
   * page.settings.username: usuario de la configuración del modem
   * page.settings.password: password de la configuración del modem
   * backup_path: path absoluto al archivo de backup
-3 Configurar check-connectivity.sh:
+
+* Configurar check-connectivity.sh:
   * PHANTOM_BIN: comando para ejecutar phantomjs (si el binario está disponible globalmente es 'phantomjs')
   * RESET_SCRIPT: path absoluto a modem-reset.js
-4. Agregar entrada en crontab para ejecutar check-connectivity.sh
+
+* Agregar entrada en crontab para ejecutar check-connectivity.sh
