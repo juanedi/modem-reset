@@ -45,7 +45,7 @@ page.open(modem_ui, function (status) {
 				console.log("Reiniciando el modem...");
 				restoreForm.submit();
 			} else {
-				console.log("Error al subir archivo, comprobar el path.")
+				console.log("Error al subir archivo de backup, comprobar el path.")
 				phantom.exit();
 			}
 
@@ -57,7 +57,7 @@ page.open(modem_ui, function (status) {
 			phantom.exit();
 		}, 7000);
 	} else {
-		console.log("Error al cargar la página...")
+		console.log("No se pudo acceder a la configuración del modem.")
 		phantom.exit();
 	}
 });
