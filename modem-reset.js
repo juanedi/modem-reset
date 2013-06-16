@@ -1,5 +1,3 @@
-var page = require('webpage').create();
-
 /**
  * Este script ingresa via phantomjs a la interfaz web de configuración
  * del modem Technicolor TC7110.
@@ -15,12 +13,15 @@ var page = require('webpage').create();
  *
  */
 
+var page = require('webpage').create();
+
 // datos de login a la UI del modem
 page.settings.userName = "";
 page.settings.password = "";
 
 // path absoluto al archivo de backup
 backup_path = "";
+
 modem_ui = "http://192.168.0.1/RgBackupRestore.asp";
 
 
@@ -33,30 +34,28 @@ page.open(modem_ui, function (status) {
 
 		console.log("Seleccionando backup a subir: " + backup_path);
 		page.uploadFile('input[name=ImportFile]', backup_path);
+
 		page.evaluate(function() {
 			// Dentro del contexto del sitio.
 
 			var fileInput = document.getElementsByName("ImportFile")[0];
-			var submitInput = (function() {
-				allInputs = document.getElementsByTagName("input");
-				for(i = 0; i < allInputs.length; i++) {
-				  if (allInputs[i].value === "Restore") return allInputs[i];
-				}
-			})();
+			var restoreForm = document.getElementsByTagName("form")[0];
 
 			if (fileInput.value) {
-				console.log("Reiniciando modem!");
-
-				// FIXME: No hace click :-(
-				submitInput.click();
+				console.log("Reiniciando el modem...");
+				restoreForm.submit();
 			} else {
 				console.log("Error al subir archivo, comprobar el path.")
+				phantom.exit();
 			}
 
 		});
-		console.log("Fin!");
-		phantom.exit();		
 
+		// hay que esperar unos segundos antes de salir, para que suba el backup
+		setTimeout(function() {
+			console.log("Fin!");
+			phantom.exit();
+		}, 7000);
 	} else {
 		console.log("Error al cargar la página...")
 		phantom.exit();
